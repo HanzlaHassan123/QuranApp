@@ -25,9 +25,23 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> EnglishSurahNames=obj.GetEnglishSurahNames();
 
 
-        
+       ArrayList<String> combinedList= new ArrayList<>();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, urduSurahNames);
+       int size=Math.min(urduSurahNames.size(),EnglishSurahNames.size());
+
+
+       for(int i=0;i<size;i++){
+           String urduSurahName=urduSurahNames.get(i);
+           String EnglishSurahName=EnglishSurahNames.get(i);
+           String combinedItem=String.format("%-90s %s", EnglishSurahName,urduSurahName);
+           combinedList.add(combinedItem);
+       }
+
+
+
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, combinedList);
         surahNames.setAdapter(adapter);
 
 
