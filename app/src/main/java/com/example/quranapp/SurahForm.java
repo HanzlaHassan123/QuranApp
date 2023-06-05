@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class SurahForm extends AppCompatActivity {
     QDH qdh;
     TextView RANGE;
+    QuranArabicText quranArabicText = new QuranArabicText();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +44,21 @@ public class SurahForm extends AppCompatActivity {
                 String fromAyatText = fromAyatofSurah.getText().toString().trim();
                 String toAyatText = toAyatofSurah.getText().toString().trim();
 
-                if (!fromAyatText.isEmpty() && !toAyatText.isEmpty()) {
+                if (fromAyatText.isEmpty() || toAyatText.isEmpty()) {
+                    String content = "";
+                    for (int i = surahStart; i < totalsurahSize; i++) {
+                        content += quranArabicText.QuranArabicText[i];
+                    }
+                    Intent intent = new Intent(SurahForm.this, Surah.class);
+                    intent.putExtra("surahContent", content);
+                    startActivity(intent);
+                } else {
                     try {
                         int fromAyat = Integer.parseInt(fromAyatText);
                         fromAyat = fromAyat + surahStart;
                         int toAyat = Integer.parseInt(toAyatText);
                         toAyat = toAyat + surahStart;
                         if (fromAyat > surahStart && toAyat <= totalsurahSize) {
-                            QuranArabicText quranArabicText = new QuranArabicText();
                             Intent intent = new Intent(SurahForm.this, Surah.class);
                             String content = "";
                             for (int i = fromAyat - 1; i < toAyat; i++) {
@@ -64,8 +72,6 @@ public class SurahForm extends AppCompatActivity {
                     } catch (NumberFormatException e) {
                         Toast.makeText(SurahForm.this, "Invalid input for Ayat range", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(SurahForm.this, "Please enter both from and to Ayat", Toast.LENGTH_SHORT).show();
                 }
             }
         });
