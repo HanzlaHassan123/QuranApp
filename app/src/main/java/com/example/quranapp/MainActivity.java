@@ -47,9 +47,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem=(String) parent.getItemAtPosition(position);
-                Intent intent= new Intent(MainActivity.this,Surahs.class);
+                Intent intent= new Intent(MainActivity.this, SurahForm.class);
                 intent.putExtra("selectedSurah",selectedItem);
                 startActivity(intent);
+
+
+
 
             }
         });
