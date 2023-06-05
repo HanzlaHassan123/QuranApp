@@ -589,6 +589,9 @@ public class QDH {
         return SSP[surahNumber];
     }
 
+    public int getSurahCount(int surahNumber){
+        return surahAyatCount[surahNumber];
+    }
     public int getParahStart(int parahNumber) {
         return PSP[parahNumber];
     }

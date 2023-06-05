@@ -49,10 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 String selectedItem=(String) parent.getItemAtPosition(position);
                 Intent intent= new Intent(MainActivity.this, SurahForm.class);
                 intent.putExtra("selectedSurah",selectedItem);
+                intent.putExtra("SurahNumber",position);
                 startActivity(intent);
-
-
-
 
             }
         });
